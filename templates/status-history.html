@@ -1,0 +1,53 @@
+{% extends "template.html" %}
+{% block title %}
+	Lourença office temperatures
+{% endblock %}
+{% block head %}
+  {{ super() }}
+  <!-- render the contents of a block defined in the parent template -->
+{% endblock %}
+
+{% block content %}
+
+	<h1>
+		<i class="fas fa-tachometer-alt"></i>
+		System Status History
+	</h1>
+
+	<table class="table table-striped">
+
+	<tr>
+		<th>id</th>
+		<th>start date</th>
+		<th>end date</th>
+		<th>process id</th>
+		<th>status</th>
+
+	</tr>
+
+	{% for item in s %}
+
+	<tr>
+
+		<td>
+			{{item.id}}
+		</td>
+		<td>
+			{{item.date_start}}
+		</td>
+		<td>
+			{{item.date_end}}
+		</td>
+		<td>
+			{{item.pir_sensor_process_id}}
+		</td>
+		<td>
+			{{item.status}}
+		</td>
+	</tr>
+
+	{% endfor %}
+
+	</table>
+
+{% endblock %}

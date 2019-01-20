@@ -1,0 +1,44 @@
+.top-bar {
+	background:#444; 
+	color: lime; 
+	margin-bottom: 50px
+}
+
+.top-bar a {
+	color: #ccc;
+}
+
+.circle {
+	display:inline-block; 
+	width:10px; 
+	height:10px; 
+	border-radius:100%; 	
+}
+
+.circle-green {
+	background: green;
+}
+
+.circle-red {
+	background: red;
+	animation: blink 2s step-start infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.card {
+	margin-bottom: 15px;
+}
+
+.video-stream {
+	max-width: 100%;
+}
+
+.canvas-wrapper { 
+	width:100%; 
+	margin-bottom: 5%
+}

@@ -1,0 +1,125 @@
+{% extends "template.html" %}
+{% block title %}
+	Environment
+{% endblock %}
+{% block head %}
+  {{ super() }}
+  <!-- render the contents of a block defined in the parent template -->
+  <script src="https://www.chartjs.org/dist/2.7.3/Chart.bundle.js"></script>
+{% endblock %}
+
+{% block content %}
+
+	<h1>
+		<i class="far fa-sun"></i>
+		Environment
+	</h1>
+
+	<div class="canvas-wrapper">
+		<canvas id="canvas"></canvas>
+	</div>
+
+	<h2>Details</h2>
+
+	<table class="table table-striped">
+
+	<tr>
+
+		<th>date</th>
+		<th>temperature</th>
+		<th>humidity</th>
+
+	</tr>
+
+	{% for item in t %}
+
+	<tr>
+
+		<td>
+			{{item.date}}
+		</td>
+		<td>
+			{{item.temperature}}º		
+		</td>
+		<td>
+			{{item.humidity}}%
+		</td>
+
+	</tr>
+
+	{% endfor %}
+
+	</table>
+
+	<script>		
+		var config = {
+			type: 'line',
+			data: {
+				labels: [
+					{% for i in l %}
+						'{{i}}',
+					{% endfor %}
+				],
+				datasets: [{
+					label: 'max',
+					backgroundColor: 'red',
+					borderColor: 'orange',
+					data: [
+					{% for i in max %}
+						'{{i}}',
+					{% endfor %}
+					],					
+					fill: false,
+				}, {
+					label: 'min',
+					fill: false,
+					backgroundColor: 'blue',
+					borderColor: 'cyan',
+					data: [
+					{% for i in min %}
+						'{{i}}',
+					{% endfor %}
+					],
+				}]
+			},
+			options: {
+				responsive: true,
+				title: {
+					display: true,
+					text: 'Temperatures Chart'
+				},
+				tooltips: {
+					mode: 'index',
+					intersect: false,
+				},
+				hover: {
+					mode: 'nearest',
+					intersect: true
+				},
+				scales: {
+					xAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Date'
+						}
+					}],
+					yAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Temp'
+						}
+					}]
+				}
+			}
+		};
+
+		window.onload = function() {
+			var ctx = document.getElementById('canvas').getContext('2d');
+			window.myLine = new Chart(ctx, config);
+		};
+		
+	</script>
+	
+{% endblock %}

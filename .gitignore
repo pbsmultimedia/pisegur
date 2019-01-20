@@ -1,0 +1,4 @@
+/static/events
+config.py
+*.pyc
+__pycache__

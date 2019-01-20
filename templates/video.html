@@ -1,0 +1,19 @@
+{% extends "template.html" %}
+{% block title %}
+	Security Camera Stream
+{% endblock %}
+{% block head %}
+  {{ super() }}
+  <!-- render the contents of a block defined in the parent template -->
+{% endblock %}
+
+{% block content %}
+
+	<h1>
+		<i class="fas fa-video"></i>
+		Security Camera
+	</h1>
+		
+	<img src=//{{url}} class="video-stream">
+
+{% endblock %}

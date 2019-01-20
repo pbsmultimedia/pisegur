@@ -1,0 +1,116 @@
+{% extends "template.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+  {{ super() }}
+  <!-- render the contents of a block defined in the parent template -->
+{% endblock %}
+
+{% block content %}
+
+	<h1>
+		<i class="fas fa-shield-alt"></i> 
+		Pisegur
+	</h1>
+	
+	<div class="row">
+		
+		<div class="col-md-4 col-12">
+			<div class="card">
+			  <div class="card-body">
+				<h5 class="card-title">
+					<i class="fas fa-tachometer-alt"></i> 
+					System Status
+				</h5>
+				
+				{% if data['armed'] != 1 %}
+					
+					<h6 class="card-subtitle mb-2 text-muted">
+						<span class="circle circle-green"></span> Disarmed
+					</h6>
+					
+					<a href="{{url_for('arm')}}" class="btn btn-danger btn-sm">
+						Arm
+					</a>
+					
+				{% endif %}
+			
+				{% if data['armed'] == 1 %}
+					
+					<h6 class="card-subtitle mb-2 text-muted">
+						<span class="circle circle-red"></span> Armed - process ID: {{data['pirSensorProcessId']}}
+					</h6>
+					
+					<a href="{{url_for('disarm')}}" class="btn btn-success btn-sm">
+						Disarm
+					</a>
+					
+				{% endif %}
+			
+				<a href="{{url_for('status_history')}}" class="btn btn-secondary btn-sm">
+					History
+				</a>
+			
+			  </div>
+			</div>
+		</div>
+		
+		<div class="col-md-4 col-12">
+			<div class="card">
+			  <div class="card-body">
+				<h5 class="card-title">
+					<i class="fas fa-exclamation-triangle"></i>
+					Security Events
+				</h5>
+				<h6 class="card-subtitle mb-2 text-muted">
+					{{data['events_unseen']}} unseen security events
+				</h6>
+				<a href="{{url_for('list_events')}}" class="btn btn-secondary btn-sm">
+					List
+				</a>
+			  </div>
+			</div>
+		</div>
+		
+		<div class="col-md-4 col-12">
+			<div class="card">
+			  <div class="card-body">
+				<h5 class="card-title">
+					<i class="fas fa-video"></i> 
+					Security Camera
+				</h5>
+				<h6 class="card-subtitle mb-2 text-muted">
+					Real Time Video Stream
+				</h6>
+				<a href="{{url_for('mjpeg')}}" class="btn btn-secondary btn-sm">
+					Watch
+				</a>
+			  </div>
+			</div>
+		</div>
+		
+		<div class="col-md-4 col-12">
+			<div class="card">
+			  <div class="card-body">
+				<h5 class="card-title">
+					<i class="far fa-sun"></i> 
+					Environment
+				</h5>
+				<h6 class="card-subtitle mb-2 text-muted">
+					Temperature: {{data['temperature']}}º Humidity: {{data['humidity']}}%
+				</h6>
+				<a href="{{url_for('list_temperatures')}}" class="btn btn-secondary btn-sm">
+					Details
+				</a>
+			  </div>
+			</div>
+		</div>	  
+				
+	</div>
+
+	<!--
+	<a href="{{url_for('shutdown')}}">
+		shutdown server
+	</a>
+	-->
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "template.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+  {{ super() }}
+  <!-- render the contents of a block defined in the parent template -->
+{% endblock %}
+{% block content %}
+  <h1>Index</h1>
+  <p class="important">
+    Welcome on my awesome page.
+{% endblock %}

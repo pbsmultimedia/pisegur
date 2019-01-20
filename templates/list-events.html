@@ -1,0 +1,60 @@
+{% extends "template.html" %}
+{% block title %}
+	Lourença office temperatures
+{% endblock %}
+{% block head %}
+  {{ super() }}
+  <!-- render the contents of a block defined in the parent template -->
+{% endblock %}
+
+{% block content %}
+
+	<h1>
+		<i class="fas fa-exclamation-triangle"></i>
+		Security Events
+	</h1>
+
+	<table class="table table-striped">
+
+	<tr>
+		<th>id</th>
+		<th>date</th>
+		<th>event type</th>
+		<th>picture</th>
+		<th>details</th>
+
+	</tr>
+
+	{% for item in e %}
+
+	<tr {%if item.seen is none %} class="table-danger" {% endif%} >
+
+
+		<td>
+			{{item.id}}
+		</td>
+		<td>
+			{{item.date}}
+		</td>
+		<td>
+			{{item.type}}
+		</td>
+		<td>
+			<img src=static/events/{{item.date.split(' ')[0]+'/'+item.date.split(' ')[1]+'.jpg'}} style="width: 200px">
+		</td>
+		<td>
+			<!--
+			<a href={{url_for('list_events')}}?delete={{item.id}} onclick="return confirm('delete this record?')">x</a>
+			-->
+			<a href={{url_for('event_details')}}?id={{item.id}} class="btn btn-success">
+				link
+			</a>
+		</td>
+
+	</tr>
+
+	{% endfor %}
+
+	</table>
+
+{% endblock %}
